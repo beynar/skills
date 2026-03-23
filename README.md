@@ -1,56 +1,31 @@
-# Skills
+# Cursor plugins (monorepo)
 
-A collection of AI agent skills. Skills are packaged instructions, rules, and references that extend AI coding agent capabilities.
+This repository hosts multiple [Cursor Marketplace](https://github.com/cursor/plugin-template) plugins using the **multi-plugin** layout:
 
-## Available Skills
+- [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json) — marketplace manifest (`pluginRoot`: `plugins`)
+- [`plugins/`](plugins/) — one folder per plugin
 
-| Skill | Description | Categories | Impact |
-|-------|-------------|------------|--------|
-| [clean-code](skills/clean-code/) | AI code review & cleanup for TypeScript/Node.js | 13 anti-pattern categories | Empirically grounded |
+## Plugins
 
-## What Are Skills?
+| Plugin | Folder | Description |
+|--------|--------|-------------|
+| **Clean Code** | [`plugins/clean-code/`](plugins/clean-code/) | TypeScript/Node.js code review, slop scan, and 10-pass cleanup |
 
-Skills follow the [Agent Skills format](https://github.com/vercel-labs/agent-skills). Each skill contains:
+## Adding another plugin
 
-- `SKILL.md` — Instructions for the agent (required)
-- `AGENTS.md` — Compiled reference document
-- `rules/` — Individual rule files with signals, tests, and examples
-- `references/` — Sub-skill documentation (review, detect, cleanup modes)
-- `metadata.json` — Version, abstract, and source references
+1. Create `plugins/<plugin-name>/` with `.cursor-plugin/plugin.json` (see [`plugins/clean-code/.cursor-plugin/plugin.json`](plugins/clean-code/.cursor-plugin/plugin.json)).
+2. Register it in [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json) under `plugins[]` with matching `name` and `./plugins/<plugin-name>` as `source`.
 
-## Installation
+See [cursor/plugin-template — add a plugin](https://github.com/cursor/plugin-template/blob/main/docs/add-a-plugin.md).
 
-### Claude Code
+## Validation
+
+From the repository root, you can use Cursor’s template validator (copy [`scripts/validate-template.mjs`](https://raw.githubusercontent.com/cursor/plugin-template/main/scripts/validate-template.mjs) from the template) and run:
 
 ```bash
-# Clone and symlink into your global skills directory
-git clone https://github.com/beynar/skills.git
-cp -r skills/clean-code ~/.claude/skills/clean-code
+node scripts/validate-template.mjs
 ```
-
-Or add to a project's `.claude/skills/` directory for project-scoped access.
-
-### Other Agents
-
-Use `AGENTS.md` or `references/system-prompt.md` as a system prompt for any LLM-based code review workflow.
-
-## Research Sources
-
-The clean-code skill is grounded in empirical data, not opinions:
-
-- **CodeRabbit (2025)**: 470 PRs. AI code = 1.7x more issues. Readability 3x worse. I/O 8x worse.
-- **GitClear (2025)**: 211M lines. Code clones up 8x. Refactoring down from 25% to <10%.
-- **Augment Code (2025)**: 1 in 5 AI samples reference fake libraries. 45% have security flaws.
-- **IEEE Spectrum (2026)**: Silent failures documented — AI removes safety checks, produces fake output.
-
-## Contributing
-
-Open an issue or PR. When adding a new rule:
-
-1. Create a `.md` file in `skills/clean-code/rules/` with YAML frontmatter (title, impact, tags)
-2. Include: signals, diagnostic test, incorrect example, correct example
-3. Update `SKILL.md` rule table and `AGENTS.md` compiled reference
 
 ## License
 
-MIT
+Per-plugin licenses are declared in each plugin’s `plugin.json` (Clean Code: MIT).

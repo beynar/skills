@@ -4,9 +4,10 @@ description: >
   This skill should be used when the user asks to "clean up code", "remove dead code",
   "fix imports", "flatten nesting", "simplify code", "strip slop", "tidy this file",
   "just fix it", or "clean this up without explaining". It applies mechanical cleanup
-  transforms to AI-generated TypeScript/Node.js code through 9 ordered passes (dead code,
-  nesting, abstractions, naming, comments, silent failures, duplicates, performance, imports).
-  No report — just the cleaned code with REVIEW flags for uncertain changes.
+  transforms to AI-generated TypeScript/Node.js code through 10 ordered passes (dead code,
+  nesting, abstractions, naming, comments, silent failures, duplicates, delegation boundary,
+  performance, imports) plus mandatory verification. No report — just the cleaned code with
+  REVIEW flags for uncertain changes.
 version: 0.1.0
 ---
 

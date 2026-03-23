@@ -1,0 +1,18 @@
+{
+  "name": "cursor-plugins",
+  "owner": {
+    "name": "beynar"
+  },
+  "metadata": {
+    "description": "Cursor Marketplace plugins (multi-plugin repository)",
+    "version": "0.1.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "clean-code",
+      "source": "./plugins/clean-code",
+      "description": "AI code reviewer and cleanup toolkit for TypeScript/Node.js — review, slop scan, and mechanical cleanup."
+    }
+  ]
+}

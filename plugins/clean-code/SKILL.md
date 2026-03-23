@@ -54,11 +54,11 @@ See: `references/slop-detector.md`
 ### 3. Code Cleanup (rewrite only)
 **Trigger**: "clean up this code", "fix this file", "strip the slop", "simplify this"
 
-Mechanical cleanup: 9 ordered passes (dead code → flatten nesting → inline abstractions → naming → comments → silent failures → duplicates → performance → imports). No report — just the cleaned code with `// REVIEW:` flags where human judgment is needed.
+Mechanical cleanup: 10 ordered passes (dead code → flatten nesting → inline abstractions → naming → comments → silent failures → duplicates → delegation boundary → performance → imports), plus mandatory verification. No report — just the cleaned code with `// REVIEW:` flags where human judgment is needed.
 
-See: `references/code-cleanup.md`
+See: `references/code-cleanup.md` and `skills/code-cleanup/SKILL.md`.
 
-## The 13 Anti-Pattern Categories
+## The 14 Anti-Pattern Categories
 
 Organized by severity, grounded in measured data:
 
@@ -79,16 +79,17 @@ Organized by severity, grounded in measured data:
 | 6 | **Monolith Instinct** | Entire workflows in one function; bad decomposition when forced | Practitioner consensus |
 | 7 | **Prophetic Engineering** | Solving hypothetical future problems, ceremony interfaces | Practitioner consensus |
 | 8 | **Clone Army** | Duplicated logic instead of reuse | GitClear (8x increase) |
-| 9 | **Speed Trap** | O(n^2) loops, N+1 queries, sequential awaits | CodeRabbit (8x I/O) |
-| 10 | **Nesting Instinct** | Deep control flow that should be flat | Agile Pain Relief (39%) |
-| 11 | **Identity Crisis** | Vague naming that hides intent | CodeRabbit (2x) |
-| 12 | **Type System Cosplay** | TypeScript features used for complexity, not safety | Practitioner consensus |
+| 9 | **Leaky Delegation** | Parent doing subservice work or duplicating subservices | Practitioner consensus |
+| 10 | **Speed Trap** | O(n^2) loops, N+1 queries, sequential awaits | CodeRabbit (8x I/O) |
+| 11 | **Nesting Instinct** | Deep control flow that should be flat | Agile Pain Relief (39%) |
+| 12 | **Identity Crisis** | Vague naming that hides intent | CodeRabbit (2x) |
+| 13 | **Type System Cosplay** | TypeScript features used for complexity, not safety | Practitioner consensus |
 
 ### Minor (consider fixing)
 
 | # | Category | What It Catches | Source |
 |---|----------|----------------|--------|
-| 13 | **Comment Theater** | Comments that restate the code or contradict it | Practitioner consensus |
+| 14 | **Comment Theater** | Comments that restate the code or contradict it | Practitioner consensus |
 
 ## Conventions Enforced
 
@@ -102,23 +103,24 @@ Organized by severity, grounded in measured data:
 
 ## Rules Reference
 
-Each anti-pattern category has a dedicated rule file in `rules/` with detailed signals, diagnostic tests, and before/after examples. The compiled version is in `AGENTS.md`.
+Each anti-pattern category has a dedicated rule file under `skills/code-review/rules/` with detailed signals, diagnostic tests, and before/after examples.
 
 | Rule File | Category |
 |-----------|----------|
-| `rules/trojan-output.md` | Silent failures & fake output |
-| `rules/error-amnesia.md` | Error handling anti-patterns |
-| `rules/walking-dead.md` | Dead & redundant code |
-| `rules/phantom-import.md` | Hallucinated APIs & outdated patterns |
-| `rules/phantom-abstractions.md` | Unnecessary abstractions |
-| `rules/monolith-instinct.md` | Function & file bloat |
-| `rules/prophetic-engineering.md` | Over-engineering |
-| `rules/clone-army.md` | Code duplication |
-| `rules/speed-trap.md` | Performance anti-patterns |
-| `rules/nesting-instinct.md` | Excessive nesting & complexity |
-| `rules/identity-crisis.md` | Naming failures |
-| `rules/type-cosplay.md` | TypeScript type system abuse |
-| `rules/comment-theater.md` | Missing or excessive comments |
+| `skills/code-review/rules/trojan-output.md` | Silent failures & fake output |
+| `skills/code-review/rules/error-amnesia.md` | Error handling anti-patterns |
+| `skills/code-review/rules/walking-dead.md` | Dead & redundant code |
+| `skills/code-review/rules/phantom-import.md` | Hallucinated APIs & outdated patterns |
+| `skills/code-review/rules/phantom-abstractions.md` | Unnecessary abstractions |
+| `skills/code-review/rules/monolith-instinct.md` | Function & file bloat |
+| `skills/code-review/rules/prophetic-engineering.md` | Over-engineering |
+| `skills/code-review/rules/clone-army.md` | Code duplication |
+| `skills/code-review/rules/leaky-delegation.md` | Separation of concerns / delegation |
+| `skills/code-review/rules/speed-trap.md` | Performance anti-patterns |
+| `skills/code-review/rules/nesting-instinct.md` | Excessive nesting & complexity |
+| `skills/code-review/rules/identity-crisis.md` | Naming failures |
+| `skills/code-review/rules/type-cosplay.md` | TypeScript type system abuse |
+| `skills/code-review/rules/comment-theater.md` | Missing or excessive comments |
 
 ## Sub-Skill References
 
@@ -127,4 +129,5 @@ Each anti-pattern category has a dedicated rule file in `rules/` with detailed s
 | `references/code-review.md` | Full review + rewrite process |
 | `references/slop-detector.md` | Diagnosis-only scan |
 | `references/code-cleanup.md` | Mechanical cleanup pipeline |
-| `references/system-prompt.md` | Standalone system prompt for any LLM |
+| `skills/code-review/references/code-review-process.md` | Step-by-step review workflow |
+| `references/system-prompt.md` | Standalone system prompt for any LLM (also under `skills/code-review/references/`) |

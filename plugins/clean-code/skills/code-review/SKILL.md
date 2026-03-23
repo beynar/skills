@@ -39,23 +39,23 @@ This skill collection contains three specialized sub-skills. Choose based on wha
 
 Full structured review with severity-ranked issues, line numbers, explanations, and a cleaned rewrite. Two outputs: the report and the fixed code.
 
-See: `references/code-review.md`
+See: `../../references/code-review.md` (repo root). Detailed workflow: `references/code-review-process.md` (this skill).
 
 ### 2. Slop Detector (diagnosis only)
 **Trigger**: "scan for slop", "detect anti-patterns", "quick quality check", "how bad is this"
 
 Fast diagnostic scan producing a severity table and a slop score (1-10). No rewrite — just a clear diagnosis with a recommendation (ship it / quick cleanup / needs full review / consider rewriting).
 
-See: `references/slop-detector.md`
+See: `../../references/slop-detector.md` (repo root).
 
 ### 3. Code Cleanup (rewrite only)
 **Trigger**: "clean up this code", "fix this file", "strip the slop", "simplify this"
 
-Mechanical cleanup: 9 ordered passes (dead code → flatten nesting → inline abstractions → naming → comments → silent failures → duplicates → performance → imports). No report — just the cleaned code with `// REVIEW:` flags where human judgment is needed.
+Mechanical cleanup: 10 ordered passes (dead code → flatten nesting → inline abstractions → naming → comments → silent failures → duplicates → delegation check → performance → imports), plus mandatory verification (Pass 10). No report — just the cleaned code with `// REVIEW:` flags where human judgment is needed.
 
-See: `references/code-cleanup.md`
+See: `../../references/code-cleanup.md` (repo root). Full pipeline: `skills/code-cleanup/SKILL.md`.
 
-## The 13 Anti-Pattern Categories
+## The 14 Anti-Pattern Categories
 
 Organized by severity, grounded in measured data:
 
@@ -100,7 +100,7 @@ Organized by severity, grounded in measured data:
 
 ## Rules Reference
 
-Each anti-pattern category has a dedicated rule file in `rules/` with detailed signals, diagnostic tests, and before/after examples. The compiled version is in `AGENTS.md`.
+Each anti-pattern category has a dedicated rule file in `rules/` (under this skill) with detailed signals, diagnostic tests, and before/after examples.
 
 | Rule File | Category |
 |-----------|----------|
@@ -123,7 +123,8 @@ Each anti-pattern category has a dedicated rule file in `rules/` with detailed s
 
 | Reference File | Purpose |
 |---------------|---------|
-| `references/code-review.md` | Full review + rewrite process |
-| `references/slop-detector.md` | Diagnosis-only scan |
-| `references/code-cleanup.md` | Mechanical cleanup pipeline |
+| `../../references/code-review.md` | Full review + rewrite process (repo root) |
+| `../../references/slop-detector.md` | Diagnosis-only scan (repo root) |
+| `../../references/code-cleanup.md` | Mechanical cleanup pipeline (repo root) |
+| `references/code-review-process.md` | Step-by-step review workflow (this skill) |
 | `references/system-prompt.md` | Standalone system prompt for any LLM |
